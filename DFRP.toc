@@ -1,0 +1,6 @@
+## Interface: 100005
+## Title: DF reward progress
+## Author: Cleeve#2479
+## Version: 1.0.0
+## Notes: Helpes to track Dragonflight rewards.
+DFRP.xml
