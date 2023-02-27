@@ -91,7 +91,7 @@ function DFRP:GetFactionInfo(factionId)
     local currentValue, threshold, _, _, _ = C_Reputation.GetFactionParagonInfo(factionId);
     local level = math.floor(currentValue/threshold);
     local realValue = currentValue - level*threshold;
-
+    
     return realValue, threshold;
 end;
 
@@ -101,8 +101,10 @@ function DFRP:CanReachReward(factionId, items)
     local repInBag = DFRP:CalcWeight(items);
     -- Calculating how much reputation we need to reach reward
     local currentValue, threshold = DFRP:GetFactionInfo(factionId);
+    -- Calculating potential value of reputation if we use items from bags
+    local potentialValue = repInBag + currentValue;
     
-    return repInBag >= threshold; 
+    return potentialValue >= threshold; 
 end;
 
 -- ==== END OF COMMON CODE AREA ====
