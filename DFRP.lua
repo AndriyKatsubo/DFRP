@@ -7,6 +7,7 @@
 -- Main code functions
 -- ===========================================
 
+-- Next area is same as in Weak Aura
 -- ==== COMMON CODE AREA ====
 DFRP = {};
 
