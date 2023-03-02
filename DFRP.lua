@@ -89,11 +89,11 @@ end;
 
 -- Returns current reputation value and threshold for faction
 function DFRP:GetFactionInfo(factionId)
-    local currentValue, threshold, _, _, _ = C_Reputation.GetFactionParagonInfo(factionId);
+    local currentValue, threshold, _, hasRewardPending, _ = C_Reputation.GetFactionParagonInfo(factionId);
     local level = math.floor(currentValue/threshold);
     local realValue = currentValue - level*threshold;
     
-    return realValue, threshold;
+    return realValue, threshold, hasRewardPending;
 end;
 
 -- Checks whether new reward level with faction can be reached by using related items
@@ -101,7 +101,11 @@ function DFRP:CanReachReward(factionId, items)
     -- Calculating total weight of items in the bag
     local repInBag = DFRP:CalcWeight(items);
     -- Calculating how much reputation we need to reach reward
-    local currentValue, threshold = DFRP:GetFactionInfo(factionId);
+    local currentValue, threshold, hasRewardPending = DFRP:GetFactionInfo(factionId);
+    --
+    if hasRewardPending then
+        return true;
+    end;
     -- Calculating potential value of reputation if we use items from bags
     local potentialValue = repInBag + currentValue;
     
